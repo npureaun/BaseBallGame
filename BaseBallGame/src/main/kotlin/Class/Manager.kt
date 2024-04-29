@@ -1,11 +1,12 @@
 package org.example.Class
 
 import org.example.Class.DialogUtils.Dialog
+import org.example.Class.DialogUtils.Logger
 import org.example.Class.StringUtils.StringOverride.BuildString
 import org.example.Class.StringUtils.StringOverride.InputString
 import org.example.Class.StringUtils.StringProcessor
 
-class Manager(private val handler: StringProcessor):Dialog() {
+class Manager(private val handler: StringProcessor, logger: Logger):Dialog(logger) {
     init { manual() }
 
     private fun startGame()
@@ -14,15 +15,15 @@ class Manager(private val handler: StringProcessor):Dialog() {
         val com=handler.processGetting()
 
         do{
+            ++loopCnt
             handler.runProcess(InputString())
             val user = handler.processGetting()
         }while (!referee(com.toString(), user.toString()))
+        loopCnt=0
     }
 
-    private fun readLog()
-    {
-        println("callLogger")
-    }
+    private fun readLog()=readAllLog()
+
 
     private fun manual()
     {

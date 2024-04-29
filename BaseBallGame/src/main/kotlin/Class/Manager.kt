@@ -12,6 +12,7 @@ class Manager {
         val cls=StringUtile()
         cls.setting(BuildString())
         cls.processInput()
+        println(cls.processGetting())
         while (true)
         {
             break

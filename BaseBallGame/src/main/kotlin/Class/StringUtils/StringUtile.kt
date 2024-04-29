@@ -10,8 +10,10 @@ class StringUtile() {
         processor?.input()
     }
 
-    fun handleException() {
-        processor?.exception()
+
+    fun processGetting(): String?
+    {
+        return processor?.getString()
     }
 
     fun setting(processor: StringInterface) {

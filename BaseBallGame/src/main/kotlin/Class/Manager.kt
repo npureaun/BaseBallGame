@@ -1,21 +1,40 @@
 package org.example.Class
 
+import org.example.Class.DialogUtils.Dialog
 import org.example.Class.StringUtils.StringOverride.BuildString
 import org.example.Class.StringUtils.StringOverride.InputString
-import org.example.Class.StringUtils.StringUtile
+import org.example.Class.StringUtils.StringProcessor
 
-class Manager {
+class Manager(private val handler: StringProcessor):Dialog() {
     init { manual() }
 
-    fun manual()
+    private fun startGame()
     {
-        val cls=StringUtile()
-        cls.setting(BuildString())
-        cls.processInput()
-        println(cls.processGetting())
+        handler.runProcess(BuildString())
+        val com=handler.processGetting()
+
+        do{
+            handler.runProcess(InputString())
+            val user = handler.processGetting()
+        }while (!referee(com.toString(), user.toString()))
+    }
+
+    private fun readLog()
+    {
+        println("callLogger")
+    }
+
+    private fun manual()
+    {
         while (true)
         {
-            break
+            val choice = inputManu()
+            when(choice)
+            {
+                1->startGame()
+                2->readLog()
+                3->break
+            }
         }
     }
 }

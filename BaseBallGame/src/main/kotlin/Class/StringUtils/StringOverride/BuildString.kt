@@ -6,7 +6,7 @@ import kotlin.random.Random
 class BuildString:StringInterface {
     override var str: String=""
 
-    override fun input() {
+    override fun setString() {
         var cnt=0
         val strBuild=StringBuilder()
 

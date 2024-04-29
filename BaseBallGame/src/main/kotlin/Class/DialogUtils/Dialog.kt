@@ -1,9 +1,5 @@
 package org.example.Class.DialogUtils
 
-import java.io.BufferedReader
-import java.io.Console
-import java.io.InputStreamReader
-
 open class Dialog {
     private fun choiceFilter(choice : String):Boolean =
         (choice.length != 1 || choice !in ("1".."3") || !choice.all { it.isDigit() })

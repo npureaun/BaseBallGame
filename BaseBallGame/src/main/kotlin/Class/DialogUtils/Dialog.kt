@@ -1,6 +1,5 @@
 package org.example.Class.DialogUtils
 
-import org.example.Class.Manager
 
 open class Dialog(private val logger: Logger) {
     var loopCnt=0
@@ -55,16 +54,22 @@ open class Dialog(private val logger: Logger) {
             println("치트 활성: 현재 정답= $com \n")
         }
         else {
+            ++loopCnt
             if (result.first >= com.length) {
-                refereeResult = "3 스트라이크! 정답입니다!! 정답 = $com\n"
-                println(refereeResult)
+                refereeResult = "3 스트라이크! 정답입니다!! 정답 = $com"
+                println("$refereeResult \n")
 
                 doContinue()
                 endSignal = true
             }
+            else if(result.first==0&&result.second==0)
+            {
+                refereeResult = "Nothing"
+                println("$refereeResult \n")
+            }
             else {
-                refereeResult = "${result.first} 스트라이크 / ${result.second} 볼\n"
-                println(refereeResult)
+                refereeResult = "${result.first} Strike / ${result.second} Ball"
+                println("$refereeResult \n")
             }
             logger.setLog(loopCnt, user, refereeResult)
         }
@@ -72,20 +77,23 @@ open class Dialog(private val logger: Logger) {
         return endSignal
     }
 
-    fun readAllLog(){
-
-
-        val strLog=StringBuilder()
-        if(logger.isEmpty()) println("진행된 게임이 없습니다.\n")
+    fun readAllLog() {
+        val strLog = StringBuilder()
+        if (logger.isEmpty()) println("진행된 게임이 없습니다.\n")
         else {
+            var gameCnt=0
             for (i in logger.indices()) {
-                strLog.append("(Loop): ${logger.getLog(i).loop} / ")
-                strLog.append("(Input): ${logger.getLog(i).user} / ")
-                strLog.append("(Result): ${logger.getLog(i).result} ")
+                if (logger.getLog(i).loop == 1) {
+                    println("\n<Game:(${++gameCnt})>")
+                }
+                strLog.append("(Loop): ${logger.getLog(i).loop} || ")
+                strLog.append("(Input): ${logger.getLog(i).user} || ")
+                strLog.append("{(Result): ${logger.getLog(i).result}}")
                 println(strLog)
                 strLog.clear()
             }
         }
+        println()
         doContinue()
     }
 }

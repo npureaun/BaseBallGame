@@ -15,7 +15,6 @@ class Manager(private val handler: StringProcessor, logger: Logger):Dialog(logge
         val com=handler.processGetting()
 
         do{
-            ++loopCnt
             handler.runProcess(InputString())
             val user = handler.processGetting()
         }while (!referee(com.toString(), user.toString()))

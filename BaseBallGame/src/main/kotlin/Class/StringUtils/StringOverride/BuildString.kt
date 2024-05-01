@@ -3,6 +3,7 @@ package org.example.Class.StringUtils.StringOverride
 import org.example.Class.StringUtils.StringInterface
 import kotlin.random.Random
 
+const val numberSize=3
 class BuildString:StringInterface {
     override var str: String=""
 
@@ -10,7 +11,7 @@ class BuildString:StringInterface {
         var cnt=0
         val strBuild=StringBuilder()
 
-        while (cnt!=3)
+        while (cnt!=numberSize)
         {
             val rand=Random.nextInt(10)
 

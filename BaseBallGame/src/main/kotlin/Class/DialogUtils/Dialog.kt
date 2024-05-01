@@ -1,13 +1,21 @@
 package org.example.Class.DialogUtils
 
+import org.example.Class.DialogUtils.Logger.LogOverride.GameLog
+import org.example.Class.DialogUtils.Logger.Logger
+import org.example.Class.DialogUtils.Logger.LogOverride.TimeTable
 
-open class Dialog(private val logger: Logger) {
-    var loopCnt=0
+
+open class Dialog() {
+    private var loopCnt=0
+    private val timeTable=TimeTable()
 
     private fun choiceFilter(choice : String):Boolean =
         (choice.length != 1 || choice !in ("1".."3") || !choice.all { it.isDigit() })
 
     private fun consoleClear() = repeat(10){println("")}
+
+    private fun choiceForText(n: Int):String=
+        arrayOf("< 게임을 시작합니다 >\n", "< 게임을 로그를 봅니다. >\n", "< 게임을 종료합니다 >\n")[n-1]
 
     private fun doContinue() {
         println("계속하려면 엔터를 눌러주세요...")
@@ -31,68 +39,25 @@ open class Dialog(private val logger: Logger) {
 
             else break
         }
-
-        val choiceNumber=choice.toInt()
-
         consoleClear()
-        println(choiceForText(choiceNumber))
-        return choiceNumber
-    }
-
-    private fun choiceForText(n: Int):String
-    {
-        val text= arrayOf("< 게임을 시작합니다 >\n", "< 게임을 로그를 봅니다. >\n", "< 게임을 종료합니다 >\n")
-        return text[n-1]
+        println(choiceForText(choice.toInt()))
+        return choice.toInt()
     }
 
     protected fun referee(com:String, user:String):Boolean {
         val result = Referee(com, user).referee()
-        var endSignal = false
-        var refereeResult = ""
-        print("--> ")
-        if (user == "Cheat") {
-            println("치트 활성: 현재 정답= $com \n")
-        }
-        else {
-            ++loopCnt
-            if (result.first >= com.length) {
-                refereeResult = "3 스트라이크! 정답입니다!! 정답 = $com"
-                println("$refereeResult \n")
+        Logger(timeTable).setLog(GameLog(++loopCnt,user,result.first))
 
-                doContinue()
-                endSignal = true
-            }
-            else if(result.first==0&&result.second==0)
-            {
-                refereeResult = "Nothing"
-                println("$refereeResult \n")
-            }
-            else {
-                refereeResult = "${result.first} Strike / ${result.second} Ball"
-                println("$refereeResult \n")
-            }
-            logger.setLog(loopCnt, user, refereeResult)
+        println("(Loop:$loopCnt) ${result.first}\n")
+        if(result.second) {
+            doContinue()
+            loopCnt = 0
         }
-
-        return endSignal
+        return result.second
     }
 
     fun readAllLog() {
-        val strLog = StringBuilder()
-        if (logger.isEmpty()) println("진행된 게임이 없습니다.\n")
-        else {
-            var gameCnt=0
-            for (i in logger.indices()) {
-                if (logger.getLog(i).loop == 1) {
-                    println("\n<Game:(${++gameCnt})>")
-                }
-                strLog.append("(Loop): ${logger.getLog(i).loop} || ")
-                strLog.append("(Input): ${logger.getLog(i).user} || ")
-                strLog.append("{(Result): ${logger.getLog(i).result}}")
-                println(strLog)
-                strLog.clear()
-            }
-        }
+        Logger(timeTable).readAll()
         println()
         doContinue()
     }

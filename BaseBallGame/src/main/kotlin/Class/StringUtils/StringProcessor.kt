@@ -3,14 +3,9 @@ package org.example.Class.StringUtils
 class StringProcessor() {
     private var processor: StringInterface? = null
 
-    private fun processInput() {
-        processor?.setString()
-    }
+    private fun processInput() = processor?.setString()
 
-    fun processGetting(): String?
-    {
-        return processor?.getString()
-    }
+    fun processGetting(): String?= processor?.getString()
 
     fun runProcess(processor: StringInterface) {
         this.processor = processor

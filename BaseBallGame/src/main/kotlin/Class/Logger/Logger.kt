@@ -1,4 +1,4 @@
-package org.example.Class.DialogUtils.Logger
+package org.example.Class.Logger
 
 class Logger<T>(private var processor: LogInterface<T>? = null) {
 

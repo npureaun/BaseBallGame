@@ -1,12 +1,12 @@
 package org.example.Class.StringUtils.StringOverride
 
+import org.example.Class.Exception.*
 import org.example.Class.StringUtils.StringInterface
 
-class StringException(errorCode: Int=0) :
-    Exception("!!! code:($errorCode) 올바르지 않은 값입니다.\n")
-
-class InputString:StringInterface {
+class InputString: StringInterface {
     override var str: String = ""
+
+    override fun getString(): String = this.str
 
     override fun setString() {
         while (true) {
@@ -14,28 +14,22 @@ class InputString:StringInterface {
             val strInput = readln()
             try {
                 when {
-                    strInput == "lapf" -> {
-                        this.str = "Cheat"; break
-                    }
+                    strInput == "lapf" -> {this.str = "Cheat"; break}
 
-                    !strInput.all { it.isDigit() } -> throw StringException(0)
-                    strInput.length != 3 -> throw StringException(1)
-                    strInput.first() == '0' -> throw StringException(2)
-                    strInput.toSet().size != 3 -> throw StringException(3)
+                    !strInput.all { it.isDigit() } -> throw NumberException()
+                    strInput.length != 3 -> throw LengthException()
+                    strInput.first() == '0' -> throw ZeroException()
+                    strInput.toSet().size != 3 -> throw EqualException()
 
                     else -> {
                         this.str = strInput;break
                     }
                 }
             }
-            catch (e: StringException)
+            catch (e: InputException)
             {
                 println(e.message)
             }
         }
-    }
-
-    override fun getString(): String {
-        return this.str
     }
 }

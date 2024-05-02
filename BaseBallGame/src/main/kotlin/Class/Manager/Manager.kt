@@ -1,13 +1,9 @@
-package org.example.Class
+package org.example.Class.Manager
 
-import org.example.Class.Logger.LogOverride.TimeChecker
-import org.example.Class.Logger.LogOverride.TimeLog
-import org.example.Class.Logger.LogOverride.TimeTable
-import org.example.Class.Logger.LogType
-import org.example.Class.Logger.Logger
-import org.example.Class.StringUtils.StringOverride.BuildString
-import org.example.Class.StringUtils.StringOverride.InputString
-import org.example.Class.StringUtils.StringProcessor
+import org.example.Class.Dialog.Dialog
+import org.example.Class.Dialog.Logger.Logger
+import org.example.Class.StringUtils.*
+import org.example.Class.StringUtils.StringOverride.*
 
 class Manager(private val handler: StringProcessor): Dialog() {
     init { manual() }
@@ -24,27 +20,10 @@ class Manager(private val handler: StringProcessor): Dialog() {
             if(referee(com.toString(), user.toString()))
             {
                 val endTime=System.currentTimeMillis()/1000
-                val loopCnt=clearLoopCnt()
-                Logger(TimeChecker).setLog(TimeLog(loopCnt,(endTime-startTime).toString()))
+                gameClear(endTime-startTime)
                 break
             }
         }
-    }
-
-    private fun readLog(type: LogType){
-        when(type)
-        {
-            LogType.GAME_LOG->Logger(TimeTable).readAll()
-            LogType.TIME_LOG->Logger(TimeChecker).readAll()
-        }
-
-        println()
-        doContinue()
-    }
-
-    private  fun clearLog(){
-        Logger(TimeTable).clear()
-        Logger(TimeChecker).clear()
     }
 
     private fun manual()
@@ -63,9 +42,9 @@ class Manager(private val handler: StringProcessor): Dialog() {
             when(choice)
             {
                 1->{ println("< 게임을 시작합니다 >\n");startGame() }
-                2->{ println("< 게임 로그를 봅니다. >\n");readLog(LogType.GAME_LOG) }
-                3->{ println("< 타임 로그를 봅니다. >\n");readLog(LogType.TIME_LOG) }
-                4->{ println("< 로그를 초기화 합니다. >\n");clearLog() }
+                2->{ println("< 게임 로그를 봅니다. >\n");readLog(Logger.LogType.GAME_LOG) }
+                3->{ println("< 타임 로그를 봅니다. >\n");readLog(Logger.LogType.TIME_LOG) }
+                4->{ println("< 로그를 초기화 합니다. >\n");clearAll() }
                 5->{ println("< 게임을 종료합니다 >\n");break }
             }
         }

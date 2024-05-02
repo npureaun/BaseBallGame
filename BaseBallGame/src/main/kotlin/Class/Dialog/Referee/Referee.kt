@@ -1,4 +1,4 @@
-package org.example.Class.Referee
+package org.example.Class.Dialog.Referee
 
 class Referee(private val com:String, private val user:String) {
 

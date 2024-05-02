@@ -1,4 +1,4 @@
-package org.example.Class.Logger
+package org.example.Class.Dialog.Logger.LogStrategy
 
 interface LogInterface<T> {
     val log: MutableList<T>

@@ -1,6 +1,6 @@
-package org.example.Class.Logger
+package org.example.Class.Dialog.Logger.LogStrategy
 
-class Logger<T>(private var processor: LogInterface<T>? = null) {
+class LogProcessor<T>(private var processor: LogInterface<T>? = null) {
 
     fun setProcess(processor: LogInterface<T>){
         this.processor=processor

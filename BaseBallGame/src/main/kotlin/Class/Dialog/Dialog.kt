@@ -1,8 +1,9 @@
-package org.example.Class
+package org.example.Class.Dialog
 
-import org.example.Class.Logger.LogOverride.*
-import org.example.Class.Logger.Logger
-import org.example.Class.Referee.Referee
+import org.example.Class.Dialog.Logger.LogStrategy.LogOverride.GameLog
+import org.example.Class.Dialog.Logger.LogStrategy.LogOverride.TimeLog
+import org.example.Class.Dialog.Logger.Logger
+import org.example.Class.Dialog.Referee.Referee
 
 open class Dialog() {
     private var loopCnt=0
@@ -13,12 +14,6 @@ open class Dialog() {
         println("계속하려면 엔터를 눌러주세요...")
         readln()
         consoleClear()
-    }
-
-    protected fun clearLoopCnt():Int {
-        val ret=loopCnt
-        loopCnt=0
-        return ret
     }
 
     protected fun inputManu(manuRange:IntRange):Int {
@@ -37,11 +32,27 @@ open class Dialog() {
 
     protected fun referee(com:String, user:String):Boolean {
         val result = Referee(com, user).referee()
-        Logger(TimeTable).setLog(GameLog(++loopCnt,user,result.first))
+        Logger.gameLog.setLog(GameLog(++loopCnt,user,result.first))
         println("(Loop:$loopCnt) ${result.first}\n")
         if(result.second) {
             doContinue()
         }
         return result.second
+    }
+
+    protected fun clearAll(){
+        Logger.clearLog(Logger.LogType.GAME_LOG)
+        Logger.clearLog(Logger.LogType.TIME_LOG)
+    }
+
+    protected fun readLog(type: Logger.LogType){
+        Logger.readAll(type)
+        println()
+        doContinue()
+    }
+
+    protected fun gameClear(time:Long){
+        Logger.timeLog.setLog(TimeLog(loopCnt,time))
+        loopCnt=0
     }
 }

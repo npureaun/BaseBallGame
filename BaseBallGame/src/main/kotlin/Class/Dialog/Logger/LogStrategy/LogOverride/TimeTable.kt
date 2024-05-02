@@ -1,9 +1,9 @@
-package org.example.Class.Logger.LogOverride
+package org.example.Class.Dialog.Logger.LogStrategy.LogOverride
 
-import org.example.Class.Logger.LogInterface
+import org.example.Class.Dialog.Logger.LogStrategy.LogInterface
 data class GameLog(val loop: Int, val user: String, val result: String)
 
-object TimeTable: LogInterface<GameLog> {
+class TimeTable: LogInterface<GameLog> {
 
     override var log= mutableListOf<GameLog>()
 

@@ -1,11 +1,11 @@
 package org.example.Class.Manager
 
-import org.example.Class.Dialog.Dialog
+import org.example.Class.Dialog.Utile
 import org.example.Class.Dialog.Logger.Logger
 import org.example.Class.StringUtils.*
 import org.example.Class.StringUtils.StringOverride.*
 
-class Manager(private val handler: StringProcessor): Dialog() {
+class Manager(private val handler: StringProcessor): Utile() {
     init { manual() }
 
     private fun startGame() {

@@ -5,7 +5,7 @@ import org.example.Class.Dialog.Logger.LogStrategy.LogOverride.TimeLog
 import org.example.Class.Dialog.Logger.Logger
 import org.example.Class.Dialog.Referee.Referee
 
-open class Dialog() {
+open class Utile() {
     private var loopCnt=0
 
     private fun consoleClear() = repeat(10){println("")}

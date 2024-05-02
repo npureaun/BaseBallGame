@@ -6,11 +6,10 @@
 ---
 
 ## 🔷 목차 🔷
-## [📒 기능과 사용법](#-기능과-사용법)
-
-## [🌃 프로그램 구조](#-프로그램-구조)
-
-## [🪐 기능 설명](#-기능-설명)
+### <p align="left"><a href="#-기능과-사용법">📒 기능과 사용법 </a></p>
+### <p align="left"><a href="#-프로그램-구조">🌃 프로그램 구조 </a></p>
+### <p align="left"><a href="#-기능-설명">🪐 기능 설명 </a></p>
+### <p align="left"><a href="#-시도해본-것">🤖 시도해본 것 </a></p>
 
 ---
 ## 📒 기능과 사용법
@@ -208,5 +207,87 @@
 # <p align="right"><a href="#-목차-">🔝</a></p>
 
 ---
-## 🪐 시도해본 것
+## 🤖 시도해본 것
+
+### 👾 동적메뉴를 구상하였습니다.  
+<details>
+<summary><code>private fun manual()</code></summary>
+    
+```kotlin
+    //메뉴를 리스트에 담고
+    val menu= listOf("게임 시작하기","게임 기록 보기","시간 기록 보기","기록 초기화","종료하기")
+
+    // 카운팅을 자동으로 하여, 메뉴를 추가해주면 모든 변경사항이 적용되도록
+    repeat(menu.size){println("${it+1}. ${menu[it]}")}
+```
+
+</details>
+
+
+### 👾 숫자생성, 저장, 조회라는 유저와 컴퓨터의 동일한 동작에 대해 <code>interface</code>화 하였습니다.
+<details>
+<summary><code>interface StringInterface</code></summary>
+
+```kotlin
+    //문자열을 생성하고, 저장하고, 받아온다라는 기능이 같다. 
+    var str:String
+    fun setString()
+    fun getString():String
+```
+    
+</details>
+
+
+### 👾 위와 마찬가지로, 각기다른 로그에 대응하는 <code>interface</code>를 통해, 서로다른 로그의 작동원리를 통일화 하였습니다. 
+<details>
+<summary><code>interface LogInterface<T></code></summary>
+
+```kotlin
+    //각 로그는 서로다른 데이터를 저장하지만, 로그를 쓰기위해 필요한 기능은 상통한다.
+    //다만, 로그마다 저장하는 DataClass는 다르기에, Generic으로 구현되어야 한다.
+    val log: MutableList<T>
+    fun input(data: T)
+    fun output(n: Int): T
+    fun isEmpty(): Boolean
+    fun indices(): IntRange
+    fun readAll()
+    fun clear()
+```
+    
+</details>
+
+
+### 👾 여러타입의 로그를 손쉽게 핸들링하고, 데이터 보존성을 높이기 위해, <code>Singleton</code>을 도입했습니다.
+<details>
+<summary><code>object Logger</code></summary>
+
+```kotlin
+    //여러타입의 로그를 Singleton을 통해 핸들링한다.
+    val gameLog = LogProcessor(TimeTable())
+    val timeLog = LogProcessor(TimeChecker())
+    fun clearLog(type: LogType){...}
+    fun readAll(type: LogType){...}
+```
+    
+</details>
+
+
+### 👾 예외에 대한 구분과, 그 예외들을 구체화하기 위해 <code>CustomException</code>을 도입했습니다.
+<details>
+<summary><code>open class InputException(message: String): Exception(message)</code></summary>
+
+```kotlin
+    //예외상황에 대한 대분류를 만들고, 소분류에서 구분한다. 
+    class NumberException:InputException("!!!올바르지 않은 값입니다.\n")
+    class LengthException:InputException("!!!올바르지 않은 길이입니다.\n")
+    class ZeroException:InputException("!!!가장 앞에 0이 있습니다.\n")
+    class EqualException:InputException("!!!같은 숫자는 생성되지 않습니다.\n")
+```
+    
+</details>
+
+
+# <p align="right"><a href="#-목차-">🔝</a></p>
+
+---
 

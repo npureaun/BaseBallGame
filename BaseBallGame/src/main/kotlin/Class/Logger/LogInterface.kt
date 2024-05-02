@@ -7,4 +7,5 @@ interface LogInterface<T> {
     fun isEmpty():Boolean
     fun indices(): IntRange
     fun readAll()
+    fun clear()
 }

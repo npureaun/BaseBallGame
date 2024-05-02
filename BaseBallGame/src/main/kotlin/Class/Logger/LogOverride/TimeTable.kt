@@ -9,6 +9,7 @@ object TimeTable: LogInterface<GameLog> {
 
     override fun isEmpty()=log.isEmpty()
     override fun indices()=log.indices
+    override fun clear()=log.clear()
     override fun output(n: Int): GameLog = log[n]as GameLog
 
     override fun input(data: GameLog){

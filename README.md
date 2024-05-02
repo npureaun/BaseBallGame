@@ -100,7 +100,7 @@
 
 프로그램 구조 도식화 입니다.
 
-![Notes_240502_142342](https://github.com/npureaun/image/assets/98468118/e9af38a4-3aae-432e-8c14-240c8976c64f)
+<img width="694" alt="스크린샷 2024-05-02 오후 5 04 32" src="https://github.com/npureaun/image/assets/98468118/96d70caf-e556-4a4a-93ec-809228b73250">
 
 
 <p align="right"><a href="#-목차-">🔷</a></p>

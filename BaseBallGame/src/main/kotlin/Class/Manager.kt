@@ -1,13 +1,10 @@
 package org.example.Class
 
 import org.example.Class.Dialog.Utile
-import org.example.Class.Dialog.Logger.Logger
-import org.example.Class.StringUtils.*
 
-class Manager(private val handler: StringProcessor): Utile() {
-    init { manual() }
+object Manager:Utile(){
 
-    private fun manual()
+    fun manual()
     {
         while (true)
         {
@@ -20,14 +17,13 @@ class Manager(private val handler: StringProcessor): Utile() {
             println("---------------")
 
             val choice = inputManu(menu.indices)
-            when(choice)
-            {
-                1->{ println("< 게임을 시작합니다 >\n");startGame() }
-                2->{ println("< 게임 로그를 봅니다. >\n");readLog(Logger.LogType.GAME_LOG) }
-                3->{ println("< 타임 로그를 봅니다. >\n");readLog(Logger.LogType.TIME_LOG) }
-                4->{ println("< 로그를 초기화 합니다. >\n");clearAll() }
-                5->{ println("< 게임을 종료합니다 >\n");break }
+            val select=Selector.fromValue(choice)
+            if(select!=null){
+                select.execute()
+                continue
             }
+            println("< 게임을 종료합니다 >\n")
+            break
         }
     }
 }

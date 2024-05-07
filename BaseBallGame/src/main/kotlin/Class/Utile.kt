@@ -5,10 +5,9 @@ import org.example.Class.Game
 import org.example.Class.StringUtils.StringProcessor
 
 open class Utile() {
-
     private fun consoleClear() = repeat(10){println("")}
 
-    protected fun doContinue() {
+    private fun doContinue() {
         println("계속하려면 엔터를 눌러주세요...")
         readln()
         consoleClear()
@@ -28,18 +27,18 @@ open class Utile() {
         return choice.toInt()
     }
 
-    protected fun clearAll(){
+    fun clearAll(){
         Logger.clearLog(Logger.LogType.GAME_LOG)
         Logger.clearLog(Logger.LogType.TIME_LOG)
     }
 
-    protected fun readLog(type: Logger.LogType){
+    fun readLog(type: Logger.LogType){
         Logger.readAll(type)
         println()
         doContinue()
     }
 
-    protected fun startGame(){
+     fun startGame(){
         Game(StringProcessor()).startGame()
         doContinue()
     }

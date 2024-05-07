@@ -4,5 +4,5 @@ import org.example.Class.Manager
 import org.example.Class.StringUtils.StringProcessor
 
 fun main() {
-    Manager(StringProcessor())
+    Manager.manual()
 }

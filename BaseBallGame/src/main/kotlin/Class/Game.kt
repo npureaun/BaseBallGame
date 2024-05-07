@@ -1,4 +1,4 @@
-package org.example.Class.Manager
+package org.example.Class
 
 import org.example.Class.Dialog.Logger.LogStrategy.LogOverride.GameLog
 import org.example.Class.Dialog.Logger.LogStrategy.LogOverride.TimeLog

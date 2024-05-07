@@ -1,9 +1,8 @@
-package org.example.Class.Manager
+package org.example.Class
 
 import org.example.Class.Dialog.Utile
 import org.example.Class.Dialog.Logger.Logger
 import org.example.Class.StringUtils.*
-import org.example.Class.StringUtils.StringOverride.*
 
 class Manager(private val handler: StringProcessor): Utile() {
     init { manual() }

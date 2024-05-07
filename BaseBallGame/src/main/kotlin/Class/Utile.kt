@@ -1,7 +1,7 @@
 package org.example.Class.Dialog
 
 import org.example.Class.Dialog.Logger.Logger
-import org.example.Class.Manager.Game
+import org.example.Class.Game
 import org.example.Class.StringUtils.StringProcessor
 
 open class Utile() {

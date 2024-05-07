@@ -1,12 +1,10 @@
 package org.example.Class.Dialog
 
-import org.example.Class.Dialog.Logger.LogStrategy.LogOverride.GameLog
-import org.example.Class.Dialog.Logger.LogStrategy.LogOverride.TimeLog
 import org.example.Class.Dialog.Logger.Logger
-import org.example.Class.Dialog.Referee.Referee
+import org.example.Class.Manager.Game
+import org.example.Class.StringUtils.StringProcessor
 
 open class Utile() {
-    private var loopCnt=0
 
     private fun consoleClear() = repeat(10){println("")}
 
@@ -30,16 +28,6 @@ open class Utile() {
         return choice.toInt()
     }
 
-    protected fun referee(com:String, user:String):Boolean {
-        val result = Referee(com, user).referee()
-        Logger.gameLog.setLog(GameLog(++loopCnt,user,result.first))
-        println("(Loop:$loopCnt) ${result.first}\n")
-        if(result.second) {
-            doContinue()
-        }
-        return result.second
-    }
-
     protected fun clearAll(){
         Logger.clearLog(Logger.LogType.GAME_LOG)
         Logger.clearLog(Logger.LogType.TIME_LOG)
@@ -51,8 +39,8 @@ open class Utile() {
         doContinue()
     }
 
-    protected fun gameClear(time:Long){
-        Logger.timeLog.setLog(TimeLog(loopCnt,time))
-        loopCnt=0
+    protected fun startGame(){
+        Game(StringProcessor()).startGame()
+        doContinue()
     }
 }

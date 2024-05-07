@@ -8,24 +8,6 @@ import org.example.Class.StringUtils.StringOverride.*
 class Manager(private val handler: StringProcessor): Utile() {
     init { manual() }
 
-    private fun startGame() {
-        handler.runProcess(BuildString())
-        val com=handler.processGetting()
-
-        val startTime=System.currentTimeMillis()/1000
-        while (true)
-        {
-            handler.runProcess(InputString())
-            val user = handler.processGetting()
-            if(referee(com.toString(), user.toString()))
-            {
-                val endTime=System.currentTimeMillis()/1000
-                gameClear(endTime-startTime)
-                break
-            }
-        }
-    }
-
     private fun manual()
     {
         while (true)
